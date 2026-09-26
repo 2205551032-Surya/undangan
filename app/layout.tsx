@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
+
 import {
   Allura,
   Montserrat,
   Playfair_Display,
 } from "next/font/google";
+
 import "./globals.css";
 
 const montserrat = Montserrat({
@@ -26,8 +28,8 @@ const playfair = Playfair_Display({
 });
 
 export const metadata: Metadata = {
-  title: "Undangan Mepandes",
-  description: "Undangan Mepandes",
+  title: "Undangan Metatah",
+  description: "Undangan Upacara Metatah",
 };
 
 export default function RootLayout({
@@ -42,10 +44,14 @@ export default function RootLayout({
           ${montserrat.variable}
           ${allura.variable}
           ${playfair.variable}
+          min-h-screen
           bg-[#151515]
           text-white
           antialiased
         `}
+        style={{
+          fontFamily: "var(--font-montserrat)",
+        }}
       >
         {children}
       </body>
