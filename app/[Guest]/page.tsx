@@ -504,17 +504,17 @@ export default function InvitationPage() {
           `}
         />
 
-        <div
-          className={`
-            absolute inset-0 z-[1]
-            transition-all duration-[1200ms]
-            ${
-              opening
-                ? "bg-[linear-gradient(to_bottom,rgba(0,0,0,0.68)_0%,rgba(0,0,0,0.55)_25%,rgba(0,0,0,0.48)_50%,rgba(0,0,0,0.68)_100%)]"
-                : "bg-[linear-gradient(to_bottom,rgba(0,0,0,0.62)_0%,rgba(0,0,0,0.48)_25%,rgba(0,0,0,0.42)_50%,rgba(0,0,0,0.55)_75%,rgba(0,0,0,0.72)_100%)]"
-            }
-          `}
-        />
+      <div
+        className={`
+          absolute inset-0 z-[1]
+          transition-all duration-[1200ms]
+          ${
+            opening
+              ? "bg-[linear-gradient(to_bottom,rgba(0,0,0,0.74)_0%,rgba(0,0,0,0.62)_25%,rgba(0,0,0,0.56)_50%,rgba(0,0,0,0.74)_100%)]"
+              : "bg-[linear-gradient(to_bottom,rgba(0,0,0,0.70)_0%,rgba(0,0,0,0.56)_25%,rgba(0,0,0,0.50)_50%,rgba(0,0,0,0.62)_75%,rgba(0,0,0,0.78)_100%)]"
+          }
+        `}
+      />
 
         <Image
           src="/ornament-top-left.png"
