@@ -54,9 +54,7 @@ export default function InvitationPage() {
     const capitalizedGuest = formattedGuest
       .split(" ")
       .map((word) =>
-        word
-          ? word.charAt(0).toUpperCase() + word.slice(1)
-          : word
+        word ? word.charAt(0).toUpperCase() + word.slice(1) : word
       )
       .join(" ");
 
@@ -70,9 +68,7 @@ export default function InvitationPage() {
   ========================== */
 
   useEffect(() => {
-    const targetDate = new Date(
-      "2026-10-01T15:00:00+08:00"
-    ).getTime();
+    const targetDate = new Date("2026-10-01T15:00:00+08:00").getTime();
 
     const updateCountdown = () => {
       const now = Date.now();
@@ -85,33 +81,25 @@ export default function InvitationPage() {
           minutes: 0,
           seconds: 0,
         });
+
         return;
       }
 
       setCountdown({
-        days: Math.floor(
-          distance / (1000 * 60 * 60 * 24)
-        ),
+        days: Math.floor(distance / (1000 * 60 * 60 * 24)),
         hours: Math.floor(
-          (distance % (1000 * 60 * 60 * 24)) /
-            (1000 * 60 * 60)
+          (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
         ),
         minutes: Math.floor(
-          (distance % (1000 * 60 * 60)) /
-            (1000 * 60)
+          (distance % (1000 * 60 * 60)) / (1000 * 60)
         ),
-        seconds: Math.floor(
-          (distance % (1000 * 60)) / 1000
-        ),
+        seconds: Math.floor((distance % (1000 * 60)) / 1000),
       });
     };
 
     updateCountdown();
 
-    const timer = window.setInterval(
-      updateCountdown,
-      1000
-    );
+    const timer = window.setInterval(updateCountdown, 1000);
 
     return () => {
       window.clearInterval(timer);
@@ -137,10 +125,7 @@ export default function InvitationPage() {
         await audioRef.current.play();
         setIsPlaying(true);
       } catch (error) {
-        console.log(
-          "Audio tidak dapat diputar:",
-          error
-        );
+        console.log("Audio tidak dapat diputar:", error);
       }
     }
 
@@ -148,12 +133,10 @@ export default function InvitationPage() {
       setOpened(true);
 
       window.setTimeout(() => {
-        document
-          .getElementById("invitation")
-          ?.scrollIntoView({
-            behavior: "smooth",
-            block: "start",
-          });
+        document.getElementById("invitation")?.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        });
       }, 150);
     }, 1500);
   };
@@ -232,8 +215,6 @@ export default function InvitationPage() {
           overflow-hidden bg-black
         "
       >
-        {/* BACKGROUND */}
-
         <div
           className={`
             absolute inset-0 z-0
@@ -241,15 +222,9 @@ export default function InvitationPage() {
             bg-cover bg-center bg-no-repeat
             transition-transform duration-[1800ms]
             [transition-timing-function:cubic-bezier(0.22,1,0.36,1)]
-            ${
-              opening
-                ? "scale-[1.075]"
-                : "scale-[1.015]"
-            }
+            ${opening ? "scale-[1.075]" : "scale-[1.015]"}
           `}
         />
-
-        {/* OVERLAY */}
 
         <div
           className={`
@@ -262,8 +237,6 @@ export default function InvitationPage() {
             }
           `}
         />
-
-        {/* CORNER ORNAMENTS */}
 
         <Image
           src="/ornament-top-left.png"
@@ -341,8 +314,6 @@ export default function InvitationPage() {
           `}
         />
 
-        {/* COVER CONTENT */}
-
         <div
           className="
             relative z-[4]
@@ -358,11 +329,7 @@ export default function InvitationPage() {
               flex-col items-center justify-center
               transition-transform duration-[1300ms]
               [transition-timing-function:cubic-bezier(0.22,1,0.36,1)]
-              ${
-                opening
-                  ? "translate-y-0"
-                  : "-translate-y-5"
-              }
+              ${opening ? "translate-y-0" : "-translate-y-5"}
             `}
           >
             <div
@@ -414,8 +381,6 @@ export default function InvitationPage() {
               01.10.2026
             </p>
           </div>
-
-          {/* GUEST */}
 
           <div
             className={`
@@ -570,12 +535,10 @@ export default function InvitationPage() {
                   text-white/95
                 "
               >
-                Atas Asung Kertha Wara Nugraha Ida Sang
-                Hyang Widhi Wasa/Tuhan Yang Maha Esa,
-                tanpa mengurangi rasa hormat kami
-                mengundang Bapak/Ibu/Saudara/i untuk
-                menghadiri Upacara Mepandes putra putri
-                kami.
+                Atas Asung Kertha Wara Nugraha Ida Sang Hyang Widhi
+                Wasa/Tuhan Yang Maha Esa, tanpa mengurangi rasa hormat kami
+                mengundang Bapak/Ibu/Saudara/i untuk menghadiri Upacara
+                Mepandes putra putri kami.
               </p>
 
               {/* FOTO */}
@@ -589,9 +552,21 @@ export default function InvitationPage() {
               >
                 <div
                   className="
+                    pointer-events-none
+                    absolute inset-[-10px]
+                    rounded-full
+                    bg-[#e1b954]/20
+                    blur-[18px]
+                  "
+                />
+
+                <div
+                  className="
+                    pointer-events-none
                     absolute inset-0
                     rounded-full
                     border-[3px] border-[#e1b954]
+                    shadow-[0_0_12px_rgba(225,185,84,0.75),0_0_28px_rgba(225,185,84,0.38)]
                   "
                 />
 
@@ -611,8 +586,6 @@ export default function InvitationPage() {
                   />
                 </div>
               </div>
-
-              {/* NAMA */}
 
               <h3
                 className="
@@ -674,7 +647,6 @@ export default function InvitationPage() {
           <section
             className="
               relative mx-auto
-              h-[100svh] min-h-[720px]
               w-full max-w-[460px]
               overflow-hidden bg-black
             "
@@ -695,15 +667,15 @@ export default function InvitationPage() {
             <div
               className="
                 relative z-10
-                flex h-full w-full flex-col
-                items-center justify-center
-                px-6 py-8
+                flex w-full flex-col
+                items-center
+                px-6 pb-12 pt-10
                 text-center
               "
             >
               <div
                 className="
-                  mb-7 flex
+                  mb-5 flex
                   items-center justify-center
                   text-[#e1b954]
                 "
@@ -746,18 +718,17 @@ export default function InvitationPage() {
                   text-white/95
                 "
               >
-                Suatu Kebahagiaan bagi kami apabila
-                Bapak/Ibu/Saudara/i berkenan hadir dan
-                memberikan doa restu kepada putra putri kami.
+                Suatu Kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i
+                berkenan hadir dan memberikan doa restu kepada putra putri kami.
               </p>
 
-              <p className="mt-6 text-[14px] font-medium">
+              <p className="mt-5 text-[14px] font-medium">
                 Kami yang berbahagia
               </p>
 
               <p
                 className="
-                  mt-6
+                  mt-5
                   text-[32px] font-medium leading-none
                   text-[#e1b954]
                   drop-shadow-[0_2px_4px_rgba(0,0,0,0.4)]
@@ -768,7 +739,7 @@ export default function InvitationPage() {
 
               <h2
                 className="
-                  mt-4 max-w-[420px] px-2
+                  mt-6 max-w-[420px] px-2
                   font-[family-name:var(--font-allura)]
                   text-[35px] font-normal leading-[1.1]
                   text-[#e1b954]
@@ -787,7 +758,6 @@ export default function InvitationPage() {
           <section
             className="
               relative mx-auto
-              h-[100svh] min-h-[760px]
               w-full max-w-[460px]
               overflow-hidden bg-black
             "
@@ -808,9 +778,9 @@ export default function InvitationPage() {
             <div
               className="
                 relative z-10
-                flex h-full w-full flex-col
-                items-center justify-center
-                px-6 py-8
+                flex w-full flex-col
+                items-center
+                px-6 pb-12 pt-10
                 text-center
               "
             >
@@ -841,7 +811,7 @@ export default function InvitationPage() {
                     drop-shadow-[0_2px_4px_rgba(0,0,0,0.4)]
                   "
                 >
-                  Waktu &amp; Tempat
+                  Waktu & Tempat
                 </h2>
 
                 <div
@@ -993,8 +963,7 @@ export default function InvitationPage() {
                       leading-[1.6]
                     "
                   >
-                    Jero Pesaji Kawan,
-                    Jl. Yeh Gangga I Desa Sudimara,
+                    Jero Pesaji Kawan, Jl. Yeh Gangga I Desa Sudimara,
                     Banjar Sudimara Kelod, Tabanan
                   </p>
                 </div>
@@ -1042,7 +1011,6 @@ export default function InvitationPage() {
           <section
             className="
               relative mx-auto
-              h-[100svh] min-h-[720px]
               w-full max-w-[460px]
               overflow-hidden bg-black
             "
@@ -1063,9 +1031,9 @@ export default function InvitationPage() {
             <div
               className="
                 relative z-10
-                flex h-full w-full flex-col
-                items-center justify-center
-                px-5 py-8
+                flex w-full flex-col
+                items-center
+                px-5 pb-12 pt-10
                 text-center
               "
             >
@@ -1216,8 +1184,8 @@ export default function InvitationPage() {
                   text-white/95
                 "
               >
-                Kami nantikan kehadiran para keluarga dan
-                sahabat untuk menjadi saksi hari yang bahagia.
+                Kami nantikan kehadiran para keluarga dan sahabat untuk
+                menjadi saksi hari yang bahagia.
               </p>
 
               {/* SAVE DATE */}
@@ -1273,13 +1241,10 @@ export default function InvitationPage() {
           <section
             className="
               relative mx-auto
-              h-[100svh] min-h-[720px]
               w-full max-w-[460px]
               overflow-hidden bg-black
             "
           >
-            {/* BACKGROUND */}
-
             <div
               className="
                 pointer-events-none
@@ -1293,14 +1258,12 @@ export default function InvitationPage() {
               }}
             />
 
-            {/* CONTENT */}
-
             <div
               className="
                 relative z-10
-                flex h-full w-full flex-col
-                items-center justify-center
-                px-7 py-8
+                flex w-full flex-col
+                items-center
+                px-7 pb-14 pt-10
                 text-center
               "
             >
@@ -1332,10 +1295,9 @@ export default function InvitationPage() {
                   text-[#e1b954]
                 "
               >
-                “Dengan Yadnya, semoga kami memperoleh
-                sifat-sifat kemuliaan, kejayaan, kekuatan
-                rohani, kekuatan jasmani, kesejahteraan dan
-                perlindungan”
+                “Dengan Yadnya, semoga kami memperoleh sifat-sifat
+                kemuliaan, kejayaan, kekuatan rohani, kekuatan jasmani,
+                kesejahteraan dan perlindungan”
               </p>
 
               {/* SOURCE */}
