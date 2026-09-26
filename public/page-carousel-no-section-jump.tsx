@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { FormEvent, useEffect, useRef, useState } from "react";
-import { CalendarDays, Clock3, House, Mail } from "lucide-react";
+import { Mail } from "lucide-react";
 
 type RsvpStatus = "Hadir" | "Tidak Hadir" | "Belum Konfirmasi";
 
@@ -949,10 +949,24 @@ export default function InvitationPage() {
               <SectionTitle title="Waktu & Tempat" />
 
               <div className="mb-5 text-[#e1b954]">
-                <CalendarDays
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.8"
                   className="h-12 w-12"
-                  strokeWidth={1.8}
-                />
+                >
+                  <rect
+                    x="3"
+                    y="5"
+                    width="18"
+                    height="16"
+                    rx="2"
+                  />
+
+                  <path d="M16 3v4M8 3v4M3 10h18" />
+                  <path d="M8 14h2M14 14h2M8 18h2M14 18h2" />
+                </svg>
               </div>
 
               <div
@@ -984,10 +998,16 @@ export default function InvitationPage() {
               <div className="mt-9 grid w-full grid-cols-1 gap-8 sm:grid-cols-2">
                 <div className="flex flex-col items-center">
                   <div className="text-[#e1b954]">
-                    <Clock3
+                    <svg
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="1.8"
                       className="h-12 w-12"
-                      strokeWidth={1.8}
-                    />
+                    >
+                      <circle cx="12" cy="12" r="9" />
+                      <path d="M12 7v6l4 2" />
+                    </svg>
                   </div>
 
                   <p className="mt-3 text-[13px]">
@@ -1001,10 +1021,18 @@ export default function InvitationPage() {
 
                 <div className="flex flex-col items-center">
                   <div className="text-[#e1b954]">
-                    <House
+                    <svg
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="1.8"
                       className="h-12 w-12"
-                      strokeWidth={1.8}
-                    />
+                    >
+                      <path d="M4 21V10l8-6 8 6v11" />
+                      <path d="M9 21v-6h6v6" />
+                      <path d="M16 8h4v13" />
+                      <path d="M17 12h2M17 16h2" />
+                    </svg>
                   </div>
 
                   <p className="mt-3 text-[13px]">
