@@ -192,13 +192,58 @@ export default function InvitationPage() {
       setOpened(true);
 
       window.setTimeout(() => {
-        document
-          .getElementById("invitation")
-          ?.scrollIntoView({
-            behavior: "smooth",
-            block: "start",
-          });
-      }, 150);
+        const invitationElement =
+          document.getElementById("invitation");
+
+        if (!invitationElement) return;
+
+        const startPosition = window.scrollY;
+        const targetPosition =
+          invitationElement.getBoundingClientRect().top +
+          window.scrollY;
+        const distance =
+          targetPosition - startPosition;
+        const duration = 2200;
+        let startTime: number | null = null;
+
+        const easeInOutCubic = (progress: number) =>
+          progress < 0.5
+            ? 4 * progress * progress * progress
+            : 1 -
+              Math.pow(-2 * progress + 2, 3) / 2;
+
+        const smoothScroll = (
+          currentTime: number
+        ) => {
+          if (startTime === null) {
+            startTime = currentTime;
+          }
+
+          const elapsed =
+            currentTime - startTime;
+          const progress = Math.min(
+            elapsed / duration,
+            1
+          );
+
+          window.scrollTo(
+            0,
+            startPosition +
+              distance *
+                easeInOutCubic(progress)
+          );
+
+          if (progress < 1) {
+            window.requestAnimationFrame(
+              smoothScroll
+            );
+          }
+        };
+
+        window.requestAnimationFrame(
+          smoothScroll
+        );
+      }, 220);
     }, 1500);
   };
 
@@ -378,7 +423,7 @@ export default function InvitationPage() {
   };
 
   /* =========================
-     ANIMASI MUNCUL SAAT DILIHAT
+     ANIMASI SAAT SCROLL
   ========================== */
 
   useEffect(() => {
@@ -390,13 +435,38 @@ export default function InvitationPage() {
       )
     );
 
-    elements.forEach((element) => {
-      element.style.opacity = "0";
-      element.style.transform =
-        "translateY(18px)";
-      element.style.transition =
-        "opacity 700ms ease, transform 700ms ease";
-    });
+    const getInitialTransform = (
+      animationType: string | undefined
+    ) => {
+      if (animationType === "left") {
+        return "translateX(-26px)";
+      }
+
+      if (animationType === "right") {
+        return "translateX(26px)";
+      }
+
+      if (animationType === "zoom") {
+        return "scale(0.94)";
+      }
+
+      if (animationType === "fade") {
+        return "translateY(0)";
+      }
+
+      return "translateY(26px)";
+    };
+
+    const getDelay = (
+      delayValue: string | undefined
+    ) => {
+      if (delayValue === "1") return 120;
+      if (delayValue === "2") return 220;
+      if (delayValue === "3") return 320;
+      if (delayValue === "4") return 420;
+
+      return 0;
+    };
 
     const observer = new IntersectionObserver(
       (entries) => {
@@ -406,23 +476,43 @@ export default function InvitationPage() {
           const element =
             entry.target as HTMLElement;
 
-          const delayValue =
-            Number(
-              element.dataset.revealDelay || "0"
-            ) * 100;
+          const animationType =
+            element.dataset.reveal;
 
-          window.setTimeout(() => {
-            element.style.opacity = "1";
-            element.style.transform =
-              "translateY(0)";
-          }, delayValue);
+          const delay = getDelay(
+            element.dataset.revealDelay
+          );
+
+          element.animate(
+            [
+              {
+                opacity: 0,
+                transform:
+                  getInitialTransform(
+                    animationType
+                  ),
+              },
+              {
+                opacity: 1,
+                transform:
+                  "translate3d(0, 0, 0) scale(1)",
+              },
+            ],
+            {
+              duration: 900,
+              delay,
+              easing:
+                "cubic-bezier(0.22, 1, 0.36, 1)",
+              fill: "both",
+            }
+          );
 
           observer.unobserve(element);
         });
       },
       {
-        threshold: 0.15,
-        rootMargin: "0px 0px -5% 0px",
+        threshold: 0.16,
+        rootMargin: "0px 0px -8% 0px",
       }
     );
 

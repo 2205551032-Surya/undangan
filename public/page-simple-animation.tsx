@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { FormEvent, useEffect, useRef, useState } from "react";
-import { Mail } from "lucide-react";
+import { CalendarDays, Clock3, House, Mail } from "lucide-react";
 
 type RsvpStatus = "Hadir" | "Tidak Hadir" | "Belum Konfirmasi";
 
@@ -59,6 +59,7 @@ export default function InvitationPage() {
   ========================== */
 
   const [activePhoto, setActivePhoto] = useState(0);
+  const thumbnailContainerRef = useRef<HTMLDivElement | null>(null);
   const thumbnailRefs = useRef<(HTMLButtonElement | null)[]>([]);
 
   /* =========================
@@ -344,10 +345,19 @@ export default function InvitationPage() {
   }, [opened]);
 
   useEffect(() => {
-    thumbnailRefs.current[activePhoto]?.scrollIntoView({
+    const container = thumbnailContainerRef.current;
+    const activeThumbnail = thumbnailRefs.current[activePhoto];
+
+    if (!container || !activeThumbnail) return;
+
+    const targetLeft =
+      activeThumbnail.offsetLeft -
+      container.clientWidth / 2 +
+      activeThumbnail.clientWidth / 2;
+
+    container.scrollTo({
+      left: targetLeft,
       behavior: "smooth",
-      block: "nearest",
-      inline: "center",
     });
   }, [activePhoto]);
 
@@ -936,27 +946,17 @@ export default function InvitationPage() {
                 text-center
               "
             >
-              <SectionTitle title="Waktu & Tempat" />
+              <div data-reveal="fade">
+                <SectionTitle title="Waktu & Tempat" />
+              </div>
 
-              <div className="mb-5 text-[#e1b954]">
-                <svg
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="1.8"
+              <div
+                className="mb-5 text-[#e1b954]"
+              >
+                <CalendarDays
                   className="h-12 w-12"
-                >
-                  <rect
-                    x="3"
-                    y="5"
-                    width="18"
-                    height="16"
-                    rx="2"
-                  />
-
-                  <path d="M16 3v4M8 3v4M3 10h18" />
-                  <path d="M8 14h2M14 14h2M8 18h2M14 18h2" />
-                </svg>
+                  strokeWidth={1.8}
+                />
               </div>
 
               <div
@@ -985,19 +985,15 @@ export default function InvitationPage() {
                 </div>
               </div>
 
-              <div className="mt-9 grid w-full grid-cols-1 gap-8 sm:grid-cols-2">
+              <div
+                className="mt-9 grid w-full grid-cols-1 gap-8 sm:grid-cols-2"
+              >
                 <div className="flex flex-col items-center">
                   <div className="text-[#e1b954]">
-                    <svg
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="1.8"
+                    <Clock3
                       className="h-12 w-12"
-                    >
-                      <circle cx="12" cy="12" r="9" />
-                      <path d="M12 7v6l4 2" />
-                    </svg>
+                      strokeWidth={1.8}
+                    />
                   </div>
 
                   <p className="mt-3 text-[13px]">
@@ -1011,18 +1007,10 @@ export default function InvitationPage() {
 
                 <div className="flex flex-col items-center">
                   <div className="text-[#e1b954]">
-                    <svg
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="1.8"
+                    <House
                       className="h-12 w-12"
-                    >
-                      <path d="M4 21V10l8-6 8 6v11" />
-                      <path d="M9 21v-6h6v6" />
-                      <path d="M16 8h4v13" />
-                      <path d="M17 12h2M17 16h2" />
-                    </svg>
+                      strokeWidth={1.8}
+                    />
                   </div>
 
                   <p className="mt-3 text-[13px]">
@@ -1072,11 +1060,15 @@ export default function InvitationPage() {
             <BackgroundPattern />
 
             <div className="relative z-10 flex w-full flex-col items-center px-5 pb-12 pt-10 text-center">
-              <h2 className="font-[family-name:var(--font-allura)] text-[46px] text-[#e1b954]">
+              <h2
+                className="font-[family-name:var(--font-allura)] text-[46px] text-[#e1b954]"
+              >
                 Menuju Hari Bahagia
               </h2>
 
-              <div className="mt-10 grid w-full grid-cols-4 gap-2.5">
+              <div
+                className="mt-10 grid w-full grid-cols-4 gap-2.5"
+              >
                 {[
                   ["days", "Hari"],
                   ["hours", "Jam"],
@@ -1110,7 +1102,9 @@ export default function InvitationPage() {
                 ))}
               </div>
 
-              <p className="mx-auto mt-10 max-w-[400px] text-[14px] font-medium leading-[1.8]">
+              <p
+                className="mx-auto mt-10 max-w-[400px] text-[14px] font-medium leading-[1.8]"
+              >
                 Kami nantikan kehadiran para keluarga dan
                 sahabat untuk menjadi saksi hari yang bahagia.
               </p>
@@ -1143,22 +1137,31 @@ export default function InvitationPage() {
             <BackgroundPattern />
 
             <div className="relative z-10 flex w-full flex-col items-center px-7 pb-14 pt-10 text-center">
-              <div className="text-[78px] font-bold leading-[0.6]">
+              <div
+                className="text-[78px] font-bold leading-[0.6]"
+              >
                 “
               </div>
 
-              <p className="mt-9 max-w-[400px] text-[17px] font-medium italic leading-[1.8] text-[#e1b954]">
+              <p
+                className="mt-9 max-w-[400px] text-[17px] font-medium italic leading-[1.8] text-[#e1b954]"
+              >
                 “Dengan Yadnya, semoga kami memperoleh
                 sifat-sifat kemuliaan, kejayaan, kekuatan
                 rohani, kekuatan jasmani, kesejahteraan dan
                 perlindungan”
               </p>
 
-              <p className="mt-6 text-[15px] font-semibold italic text-[#e1b954]">
+              <p
+                className="mt-6 text-[15px] font-semibold italic text-[#e1b954]"
+              >
                 (Yayurweda XV.113)
               </p>
 
-              <Divider />
+              <div
+              >
+                <Divider />
+              </div>
             </div>
           </section>
 
@@ -1170,7 +1173,9 @@ export default function InvitationPage() {
             <BackgroundPattern />
 
             <div className="relative z-10 flex w-full flex-col items-center px-5 pb-14 pt-10 text-center">
-              <SectionTitle title="Potret Bahagia Kami" />
+              <div data-reveal="fade">
+                <SectionTitle title="Potret Bahagia Kami" />
+              </div>
 
               {/* FOTO UTAMA */}
 
@@ -1278,6 +1283,7 @@ export default function InvitationPage() {
               {/* THUMBNAIL FOTO */}
 
               <div
+                ref={thumbnailContainerRef}
                 className="
                   mt-4 flex w-full
                   snap-x snap-mandatory
@@ -1377,7 +1383,9 @@ export default function InvitationPage() {
   >
     {/* TITLE */}
 
-    <div className="text-center">
+    <div
+      className="text-center"
+    >
       <div
         className="
           mx-auto mb-3
@@ -1610,7 +1618,9 @@ export default function InvitationPage() {
         DAFTAR UCAPAN
     ========================== */}
 
-    <div className="mt-12">
+    <div
+      className="mt-12"
+    >
       <div
         className="
           flex items-end justify-between

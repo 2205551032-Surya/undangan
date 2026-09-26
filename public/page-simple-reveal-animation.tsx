@@ -377,6 +377,64 @@ export default function InvitationPage() {
     );
   };
 
+  /* =========================
+     ANIMASI MUNCUL SAAT DILIHAT
+  ========================== */
+
+  useEffect(() => {
+    if (!opened) return;
+
+    const elements = Array.from(
+      document.querySelectorAll<HTMLElement>(
+        "[data-reveal]"
+      )
+    );
+
+    elements.forEach((element) => {
+      element.style.opacity = "0";
+      element.style.transform =
+        "translateY(18px)";
+      element.style.transition =
+        "opacity 700ms ease, transform 700ms ease";
+    });
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+
+          const element =
+            entry.target as HTMLElement;
+
+          const delayValue =
+            Number(
+              element.dataset.revealDelay || "0"
+            ) * 100;
+
+          window.setTimeout(() => {
+            element.style.opacity = "1";
+            element.style.transform =
+              "translateY(0)";
+          }, delayValue);
+
+          observer.unobserve(element);
+        });
+      },
+      {
+        threshold: 0.15,
+        rootMargin: "0px 0px -5% 0px",
+      }
+    );
+
+    elements.forEach((element) => {
+      observer.observe(element);
+    });
+
+    return () => {
+      observer.disconnect();
+    };
+  }, [opened]);
+
   return (
     <main className="min-h-screen w-full bg-[#151515] text-white">
       <audio
@@ -717,6 +775,7 @@ export default function InvitationPage() {
             />
 
             <div
+              data-reveal="fade"
               className="
                 relative z-10
                 flex h-full w-full flex-col
@@ -870,6 +929,7 @@ export default function InvitationPage() {
             <BackgroundPattern />
 
             <div
+              data-reveal="fade"
               className="
                 relative z-10
                 flex w-full flex-col
@@ -946,9 +1006,15 @@ export default function InvitationPage() {
                 text-center
               "
             >
-              <SectionTitle title="Waktu & Tempat" />
+              <div data-reveal="fade">
+                <SectionTitle title="Waktu & Tempat" />
+              </div>
 
-              <div className="mb-5 text-[#e1b954]">
+              <div
+                data-reveal="zoom"
+                data-reveal-delay="1"
+                className="mb-5 text-[#e1b954]"
+              >
                 <CalendarDays
                   className="h-12 w-12"
                   strokeWidth={1.8}
@@ -956,6 +1022,8 @@ export default function InvitationPage() {
               </div>
 
               <div
+                data-reveal="fade"
+                data-reveal-delay="2"
                 className="
                   grid w-full
                   grid-cols-[1fr_auto_1fr]
@@ -981,7 +1049,11 @@ export default function InvitationPage() {
                 </div>
               </div>
 
-              <div className="mt-9 grid w-full grid-cols-1 gap-8 sm:grid-cols-2">
+              <div
+                data-reveal="fade"
+                data-reveal-delay="3"
+                className="mt-9 grid w-full grid-cols-1 gap-8 sm:grid-cols-2"
+              >
                 <div className="flex flex-col items-center">
                   <div className="text-[#e1b954]">
                     <Clock3
@@ -1019,6 +1091,8 @@ export default function InvitationPage() {
               </div>
 
               <a
+                data-reveal="zoom"
+                data-reveal-delay="4"
                 href="https://www.google.com/maps/search/?api=1&query=Jero+Pesaji+Kawan+Jl+Yeh+Gangga+I+Sudimara+Tabanan"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -1054,11 +1128,18 @@ export default function InvitationPage() {
             <BackgroundPattern />
 
             <div className="relative z-10 flex w-full flex-col items-center px-5 pb-12 pt-10 text-center">
-              <h2 className="font-[family-name:var(--font-allura)] text-[46px] text-[#e1b954]">
+              <h2
+                data-reveal="fade"
+                className="font-[family-name:var(--font-allura)] text-[46px] text-[#e1b954]"
+              >
                 Menuju Hari Bahagia
               </h2>
 
-              <div className="mt-10 grid w-full grid-cols-4 gap-2.5">
+              <div
+                data-reveal="zoom"
+                data-reveal-delay="1"
+                className="mt-10 grid w-full grid-cols-4 gap-2.5"
+              >
                 {[
                   ["days", "Hari"],
                   ["hours", "Jam"],
@@ -1092,12 +1173,18 @@ export default function InvitationPage() {
                 ))}
               </div>
 
-              <p className="mx-auto mt-10 max-w-[400px] text-[14px] font-medium leading-[1.8]">
+              <p
+                data-reveal="fade"
+                data-reveal-delay="2"
+                className="mx-auto mt-10 max-w-[400px] text-[14px] font-medium leading-[1.8]"
+              >
                 Kami nantikan kehadiran para keluarga dan
                 sahabat untuk menjadi saksi hari yang bahagia.
               </p>
 
               <a
+                data-reveal="zoom"
+                data-reveal-delay="3"
                 href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Upacara+Metatah&dates=20261001T070000Z/20261001T100000Z&details=Upacara+Metatah&location=Jero+Pesaji+Kawan%2C+Jl.+Yeh+Gangga+I+Desa+Sudimara%2C+Banjar+Sudimara+Kelod%2C+Tabanan"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -1125,22 +1212,38 @@ export default function InvitationPage() {
             <BackgroundPattern />
 
             <div className="relative z-10 flex w-full flex-col items-center px-7 pb-14 pt-10 text-center">
-              <div className="text-[78px] font-bold leading-[0.6]">
+              <div
+                data-reveal="zoom"
+                className="text-[78px] font-bold leading-[0.6]"
+              >
                 “
               </div>
 
-              <p className="mt-9 max-w-[400px] text-[17px] font-medium italic leading-[1.8] text-[#e1b954]">
+              <p
+                data-reveal="fade"
+                data-reveal-delay="1"
+                className="mt-9 max-w-[400px] text-[17px] font-medium italic leading-[1.8] text-[#e1b954]"
+              >
                 “Dengan Yadnya, semoga kami memperoleh
                 sifat-sifat kemuliaan, kejayaan, kekuatan
                 rohani, kekuatan jasmani, kesejahteraan dan
                 perlindungan”
               </p>
 
-              <p className="mt-6 text-[15px] font-semibold italic text-[#e1b954]">
+              <p
+                data-reveal="fade"
+                data-reveal-delay="2"
+                className="mt-6 text-[15px] font-semibold italic text-[#e1b954]"
+              >
                 (Yayurweda XV.113)
               </p>
 
-              <Divider />
+              <div
+                data-reveal="zoom"
+                data-reveal-delay="3"
+              >
+                <Divider />
+              </div>
             </div>
           </section>
 
@@ -1152,11 +1255,15 @@ export default function InvitationPage() {
             <BackgroundPattern />
 
             <div className="relative z-10 flex w-full flex-col items-center px-5 pb-14 pt-10 text-center">
-              <SectionTitle title="Potret Bahagia Kami" />
+              <div data-reveal="fade">
+                <SectionTitle title="Potret Bahagia Kami" />
+              </div>
 
               {/* FOTO UTAMA */}
 
               <div
+                data-reveal="zoom"
+                data-reveal-delay="1"
                 className="
                   relative mt-2
                   aspect-[4/3] w-full
@@ -1261,6 +1368,8 @@ export default function InvitationPage() {
 
               <div
                 ref={thumbnailContainerRef}
+                data-reveal="fade"
+                data-reveal-delay="2"
                 className="
                   mt-4 flex w-full
                   snap-x snap-mandatory
@@ -1360,7 +1469,10 @@ export default function InvitationPage() {
   >
     {/* TITLE */}
 
-    <div className="text-center">
+    <div
+      data-reveal="fade"
+      className="text-center"
+    >
       <div
         className="
           mx-auto mb-3
@@ -1414,6 +1526,8 @@ export default function InvitationPage() {
     {/* FORM RSVP */}
 
     <form
+      data-reveal="fade"
+      data-reveal-delay="1"
       onSubmit={handleSubmitRsvp}
       className="mt-8"
     >
@@ -1593,7 +1707,11 @@ export default function InvitationPage() {
         DAFTAR UCAPAN
     ========================== */}
 
-    <div className="mt-12">
+    <div
+      data-reveal="fade"
+      data-reveal-delay="2"
+      className="mt-12"
+    >
       <div
         className="
           flex items-end justify-between
@@ -1786,6 +1904,7 @@ export default function InvitationPage() {
   <BackgroundPattern />
 
   <div
+    data-reveal="fade"
     className="
       relative z-10
       flex flex-col
