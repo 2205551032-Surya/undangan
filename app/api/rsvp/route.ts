@@ -1,68 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
-import fs from "fs/promises";
-import path from "path";
+import { supabase } from "@/lib/supabase";
 
-interface RsvpItem {
-  id: string;
-  name: string;
-  message: string;
-  status: "Hadir" | "Tidak Hadir" | "Belum Konfirmasi";
-  createdAt: string;
-}
-
-const dataDirectory = path.join(
-  process.cwd(),
-  "data"
-);
-
-const dataFile = path.join(
-  dataDirectory,
-  "rsvp.json"
-);
-
-async function ensureFile() {
-  try {
-    await fs.mkdir(dataDirectory, {
-      recursive: true,
-    });
-
-    try {
-      await fs.access(dataFile);
-    } catch {
-      await fs.writeFile(
-        dataFile,
-        "[]",
-        "utf-8"
-      );
-    }
-  } catch (error) {
-    console.error(
-      "Gagal menyiapkan file RSVP:",
-      error
-    );
-  }
-}
-
-async function readRsvp(): Promise<RsvpItem[]> {
-  await ensureFile();
-
-  try {
-    const content = await fs.readFile(
-      dataFile,
-      "utf-8"
-    );
-
-    const parsed = JSON.parse(content);
-
-    if (!Array.isArray(parsed)) {
-      return [];
-    }
-
-    return parsed;
-  } catch {
-    return [];
-  }
-}
+type RsvpStatus =
+  | "Hadir"
+  | "Tidak Hadir"
+  | "Belum Konfirmasi";
 
 /* =========================
    GET RSVP
@@ -70,22 +12,42 @@ async function readRsvp(): Promise<RsvpItem[]> {
 
 export async function GET() {
   try {
-    const data = await readRsvp();
+    const { data, error } = await supabase
+      .from("rsvp")
+      .select("*")
+      .order("created_at", {
+        ascending: false,
+      });
 
-    const sortedData = [...data].sort(
-      (a, b) =>
-        new Date(b.createdAt).getTime() -
-        new Date(a.createdAt).getTime()
-    );
+    if (error) {
+      console.error("GET RSVP error:", error);
 
-    return NextResponse.json(sortedData);
+      return NextResponse.json(
+        {
+          message: "Gagal mengambil data RSVP.",
+        },
+        {
+          status: 500,
+        }
+      );
+    }
+
+    const formattedData =
+      data?.map((item) => ({
+        id: item.id,
+        name: item.name,
+        message: item.message,
+        status: item.status,
+        createdAt: item.created_at,
+      })) ?? [];
+
+    return NextResponse.json(formattedData);
   } catch (error) {
-    console.error(error);
+    console.error("GET RSVP exception:", error);
 
     return NextResponse.json(
       {
-        message:
-          "Gagal mengambil data RSVP.",
+        message: "Terjadi kesalahan pada server.",
       },
       {
         status: 500,
@@ -114,7 +76,7 @@ export async function POST(
 
     const status = String(
       body.status || ""
-    );
+    ) as RsvpStatus;
 
     if (!name) {
       return NextResponse.json(
@@ -138,7 +100,7 @@ export async function POST(
       );
     }
 
-    const allowedStatus = [
+    const allowedStatus: RsvpStatus[] = [
       "Hadir",
       "Tidak Hadir",
       "Belum Konfirmasi",
@@ -156,42 +118,51 @@ export async function POST(
       );
     }
 
-    const data = await readRsvp();
+    const { data, error } = await supabase
+      .from("rsvp")
+      .insert({
+        name,
+        message,
+        status,
+      })
+      .select()
+      .single();
 
-    const newRsvp: RsvpItem = {
-      id: crypto.randomUUID(),
-      name,
-      message,
-      status:
-        status as RsvpItem["status"],
-      createdAt: new Date().toISOString(),
-    };
+    if (error) {
+      console.error("POST RSVP error:", error);
 
-    data.push(newRsvp);
-
-    await fs.writeFile(
-      dataFile,
-      JSON.stringify(data, null, 2),
-      "utf-8"
-    );
+      return NextResponse.json(
+        {
+          message: "Gagal menyimpan RSVP.",
+        },
+        {
+          status: 500,
+        }
+      );
+    }
 
     return NextResponse.json(
       {
-        message:
-          "RSVP berhasil disimpan.",
-        data: newRsvp,
+        message: "RSVP berhasil disimpan.",
+        data: {
+          id: data.id,
+          name: data.name,
+          message: data.message,
+          status: data.status,
+          createdAt: data.created_at,
+        },
       },
       {
         status: 201,
       }
     );
   } catch (error) {
-    console.error(error);
+    console.error("POST RSVP exception:", error);
 
     return NextResponse.json(
       {
         message:
-          "Gagal menyimpan RSVP.",
+          "Terjadi kesalahan saat menyimpan RSVP.",
       },
       {
         status: 500,

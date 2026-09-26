@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { FormEvent, useEffect, useRef, useState } from "react";
+import { Mail } from "lucide-react";
 
 type RsvpStatus = "Hadir" | "Tidak Hadir" | "Belum Konfirmasi";
 
@@ -310,7 +311,7 @@ export default function InvitationPage() {
     <main className="min-h-screen w-full bg-[#151515] text-white">
       <audio
         ref={audioRef}
-        src="/gus-teja.mp3"
+        src="/gus-teja-2.mp3"
         loop
         preload="auto"
       />
@@ -499,7 +500,7 @@ export default function InvitationPage() {
               `}
             >
               <Image
-                src="/ornament-center.png"
+                src="/logo.png"
                 alt="Ornamen"
                 width={180}
                 height={120}
@@ -1143,511 +1144,531 @@ export default function InvitationPage() {
             </div>
           </section>
 
-          {/* =================================================
-              PAGE 8 - RSVP & UCAPAN
-          ================================================== */}
+{/* =================================================
+    PAGE 8 - RSVP & UCAPAN
+================================================== */}
 
-          <section className="relative mx-auto w-full max-w-[460px] overflow-hidden bg-black">
-            <BackgroundPattern />
+<section
+  className="
+    relative mx-auto
+    w-full max-w-[460px]
+    overflow-hidden bg-black
+  "
+>
+  <BackgroundPattern />
 
-            <div
+  <div
+    className="
+      relative z-10
+      w-full
+      px-5 pb-14 pt-10
+    "
+  >
+    {/* TITLE */}
+
+    <div className="text-center">
+      <div
+        className="
+          mx-auto mb-3
+          flex justify-center
+          text-[#e1b954]
+        "
+      >
+        <div
+          className="
+            flex h-[52px] w-[52px]
+            items-center justify-center
+            rounded-full
+            border border-[#e1b954]
+            text-[#e1b954]
+          "
+        >
+          <Mail
+            size={23}
+            strokeWidth={1.7}
+          />
+        </div>
+      </div>
+
+      <h2
+        className="
+          font-[family-name:var(--font-allura)]
+          text-[38px] font-normal
+          leading-[1.15]
+          text-[#e1b954]
+        "
+      >
+        Konfirmasi Kehadiran
+        <br />
+        & Kirim Pesan Bahagia
+      </h2>
+
+      <p
+        className="
+          mx-auto mt-4
+          max-w-[360px]
+          text-[12px]
+          leading-[1.7]
+          text-white/70
+        "
+      >
+        Silakan konfirmasi kehadiran dan tinggalkan
+        ucapan terbaik untuk kami.
+      </p>
+    </div>
+
+    {/* FORM RSVP */}
+
+    <form
+      onSubmit={handleSubmitRsvp}
+      className="mt-8"
+    >
+      {/* NAMA */}
+
+      <div>
+        <label
+          htmlFor="rsvp-name"
+          className="
+            mb-2 block
+            text-[13px] font-semibold
+            text-white
+          "
+        >
+          Nama
+        </label>
+
+        <input
+          id="rsvp-name"
+          type="text"
+          value={rsvpName}
+          onChange={(event) =>
+            setRsvpName(event.target.value)
+          }
+          placeholder="Masukkan nama"
+          className="
+            h-[48px] w-full
+            rounded-lg
+            border border-white/15
+            bg-white
+            px-4
+            text-[14px]
+            text-[#222]
+            outline-none
+            transition
+            placeholder:text-gray-400
+            focus:border-[#e1b954]
+            focus:ring-2
+            focus:ring-[#e1b954]/20
+          "
+        />
+      </div>
+
+      {/* UCAPAN */}
+
+      <div className="mt-5">
+        <label
+          htmlFor="rsvp-message"
+          className="
+            mb-2 block
+            text-[13px] font-semibold
+            text-white
+          "
+        >
+          Ucapan
+        </label>
+
+        <textarea
+          id="rsvp-message"
+          value={rsvpMessage}
+          onChange={(event) =>
+            setRsvpMessage(event.target.value)
+          }
+          placeholder="Tulis ucapan di sini"
+          rows={5}
+          className="
+            w-full resize-none
+            rounded-lg
+            border border-white/15
+            bg-white
+            px-4 py-3
+            text-[14px]
+            leading-6
+            text-[#222]
+            outline-none
+            transition
+            placeholder:text-gray-400
+            focus:border-[#e1b954]
+            focus:ring-2
+            focus:ring-[#e1b954]/20
+          "
+        />
+      </div>
+
+      {/* STATUS */}
+
+      <div
+        className="
+          mt-5
+          flex flex-wrap
+          gap-x-5 gap-y-3
+        "
+      >
+        {[
+          "Hadir",
+          "Tidak Hadir",
+          "Belum Konfirmasi",
+        ].map((status) => (
+          <label
+            key={status}
+            className="
+              flex cursor-pointer
+              items-center gap-2
+              text-[12px]
+              font-medium
+              text-white/90
+            "
+          >
+            <input
+              type="radio"
+              name="rsvp-status"
+              value={status}
+              checked={rsvpStatus === status}
+              onChange={() =>
+                setRsvpStatus(
+                  status as RsvpStatus
+                )
+              }
               className="
-                relative z-10
-                w-full
-                px-5 pb-14 pt-10
+                h-4 w-4
+                accent-[#e1b954]
               "
-            >
-              {/* TITLE */}
+            />
 
-              <div className="text-center">
-                <div className="mx-auto mb-3 flex justify-center text-[#e1b954]">
-                  <div
-                    className="
-                      flex h-[52px] w-[52px]
-                      items-center justify-center
-                      rounded-full
-                      border border-[#e1b954]
-                      text-[22px]
-                    "
-                  >
-                    ❦
-                  </div>
-                </div>
+            {status}
+          </label>
+        ))}
+      </div>
 
-                <h2
-                  className="
-                    font-[family-name:var(--font-allura)]
-                    text-[38px] font-normal
-                    leading-[1.15]
-                    text-[#e1b954]
-                  "
+      {/* INFO */}
+
+      {rsvpInfo && (
+        <p
+          className="
+            mt-5
+            text-center
+            text-[12px]
+            leading-5
+            text-[#e1b954]
+          "
+        >
+          {rsvpInfo}
+        </p>
+      )}
+
+      {/* BUTTON */}
+
+      <div className="mt-7 flex justify-center">
+        <button
+          type="submit"
+          disabled={sendingRsvp}
+          className="
+            min-w-[190px]
+            rounded-lg
+            border border-[#8f742e]
+            bg-[#e1b954]
+            px-6 py-3.5
+            text-[13px] font-semibold
+            text-[#3d3008]
+            shadow-[0_6px_20px_rgba(0,0,0,0.28)]
+            transition-all duration-300
+            hover:-translate-y-0.5
+            hover:bg-[#edc967]
+            active:scale-[0.98]
+            disabled:cursor-not-allowed
+            disabled:opacity-60
+          "
+        >
+          {sendingRsvp
+            ? "Mengirim..."
+            : "Konfirmasi Kehadiran"}
+        </button>
+      </div>
+    </form>
+
+    {/* =========================
+        DAFTAR UCAPAN
+    ========================== */}
+
+    <div className="mt-12">
+      <div
+        className="
+          flex items-end justify-between
+          border-b border-[#e1b954]/50
+          pb-3
+        "
+      >
+        <h3 className="text-[15px] font-semibold text-white">
+          {rsvpList.length} Ucapan
+        </h3>
+
+        <span className="text-[11px] text-white/50">
+          Pesan Bahagia
+        </span>
+      </div>
+
+      <div className="mt-5 space-y-3">
+        {visibleRsvp.length === 0 && (
+          <div
+            className="
+              rounded-xl
+              border border-white/10
+              bg-white/[0.04]
+              px-5 py-8
+              text-center
+            "
+          >
+            <p className="text-[13px] text-white/60">
+              Belum ada ucapan.
+            </p>
+
+            <p className="mt-1 text-[12px] text-white/40">
+              Jadilah yang pertama mengirim pesan bahagia.
+            </p>
+          </div>
+        )}
+
+        {visibleRsvp.map((item) => (
+          <div
+            key={item.id}
+            className="
+              rounded-xl
+              border border-white/10
+              bg-white/[0.96]
+              p-4
+              text-[#252525]
+              shadow-[0_5px_18px_rgba(0,0,0,0.15)]
+            "
+          >
+            <div className="flex items-start gap-3">
+              {/* AVATAR */}
+
+              <div
+                className="
+                  flex h-10 w-10
+                  shrink-0
+                  items-center justify-center
+                  rounded-full
+                  bg-[#8b8b8b]
+                  text-white
+                "
+              >
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                  className="h-5 w-5"
                 >
-                  Konfirmasi Kehadiran
-                  <br />
-                  & Kirim Pesan Bahagia
-                </h2>
-
-                <p
-                  className="
-                    mx-auto mt-4
-                    max-w-[360px]
-                    text-[12px]
-                    leading-[1.7]
-                    text-white/70
-                  "
-                >
-                  Silakan konfirmasi kehadiran dan tinggalkan
-                  ucapan terbaik untuk kami.
-                </p>
+                  <path d="M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8Zm0 2c-4.42 0-8 2.24-8 5v1h16v-1c0-2.76-3.58-5-8-5Z" />
+                </svg>
               </div>
 
-              {/* FORM RSVP */}
-
-              <form
-                onSubmit={handleSubmitRsvp}
-                className="mt-8"
-              >
-                <div>
-                  <label
-                    htmlFor="rsvp-name"
-                    className="
-                      mb-2 block
-                      text-[13px] font-semibold
-                      text-white
-                    "
-                  >
-                    Nama
-                  </label>
-
-                  <input
-                    id="rsvp-name"
-                    type="text"
-                    value={rsvpName}
-                    onChange={(event) =>
-                      setRsvpName(event.target.value)
-                    }
-                    placeholder="Masukkan nama"
-                    className="
-                      h-[48px] w-full
-                      rounded-lg
-                      border border-white/15
-                      bg-white
-                      px-4
-                      text-[14px]
-                      text-[#222]
-                      outline-none
-                      transition
-                      placeholder:text-gray-400
-                      focus:border-[#e1b954]
-                      focus:ring-2
-                      focus:ring-[#e1b954]/20
-                    "
-                  />
-                </div>
-
-                <div className="mt-5">
-                  <label
-                    htmlFor="rsvp-message"
-                    className="
-                      mb-2 block
-                      text-[13px] font-semibold
-                      text-white
-                    "
-                  >
-                    Ucapan
-                  </label>
-
-                  <textarea
-                    id="rsvp-message"
-                    value={rsvpMessage}
-                    onChange={(event) =>
-                      setRsvpMessage(event.target.value)
-                    }
-                    placeholder="Tulis ucapan di sini"
-                    rows={5}
-                    className="
-                      w-full resize-none
-                      rounded-lg
-                      border border-white/15
-                      bg-white
-                      px-4 py-3
-                      text-[14px]
-                      leading-6
-                      text-[#222]
-                      outline-none
-                      transition
-                      placeholder:text-gray-400
-                      focus:border-[#e1b954]
-                      focus:ring-2
-                      focus:ring-[#e1b954]/20
-                    "
-                  />
-                </div>
-
-                {/* STATUS */}
-
+              <div className="min-w-0 flex-1">
                 <div
                   className="
-                    mt-5
                     flex flex-wrap
-                    gap-x-5 gap-y-3
+                    items-center gap-2
                   "
                 >
-                  {[
-                    "Hadir",
-                    "Tidak Hadir",
-                    "Belum Konfirmasi",
-                  ].map((status) => (
-                    <label
-                      key={status}
-                      className="
-                        flex cursor-pointer
-                        items-center gap-2
-                        text-[12px]
-                        font-medium
-                        text-white/90
-                      "
-                    >
-                      <input
-                        type="radio"
-                        name="rsvp-status"
-                        value={status}
-                        checked={rsvpStatus === status}
-                        onChange={() =>
-                          setRsvpStatus(
-                            status as RsvpStatus
-                          )
-                        }
-                        className="
-                          h-4 w-4
-                          accent-[#e1b954]
-                        "
-                      />
-
-                      {status}
-                    </label>
-                  ))}
-                </div>
-
-                {/* INFO */}
-
-                {rsvpInfo && (
                   <p
                     className="
-                      mt-5
-                      text-center
-                      text-[12px]
-                      leading-5
-                      text-[#e1b954]
+                      break-words
+                      text-[14px]
+                      font-semibold
+                      text-[#222]
                     "
                   >
-                    {rsvpInfo}
+                    {item.name}
                   </p>
-                )}
 
-                {/* BUTTON */}
-
-                <div className="mt-7 flex justify-center">
-                  <button
-                    type="submit"
-                    disabled={sendingRsvp}
-                    className="
-                      min-w-[190px]
-                      rounded-lg
-                      border border-[#8f742e]
-                      bg-[#e1b954]
-                      px-6 py-3.5
-                      text-[13px] font-semibold
-                      text-[#3d3008]
-                      shadow-[0_6px_20px_rgba(0,0,0,0.28)]
-                      transition-all duration-300
-                      hover:-translate-y-0.5
-                      hover:bg-[#edc967]
-                      active:scale-[0.98]
-                      disabled:cursor-not-allowed
-                      disabled:opacity-60
-                    "
+                  <span
+                    className={`
+                      rounded-md
+                      px-2 py-1
+                      text-[9px]
+                      font-semibold
+                      ${
+                        item.status === "Hadir"
+                          ? "bg-[#f3c65c] text-[#4b3905]"
+                          : item.status === "Tidak Hadir"
+                            ? "bg-red-100 text-red-700"
+                            : "bg-gray-200 text-gray-600"
+                      }
+                    `}
                   >
-                    {sendingRsvp
-                      ? "Mengirim..."
-                      : "Konfirmasi Kehadiran"}
-                  </button>
-                </div>
-              </form>
-
-              {/* =========================
-                  DAFTAR UCAPAN
-              ========================== */}
-
-              <div className="mt-12">
-                <div
-                  className="
-                    flex items-end justify-between
-                    border-b border-[#e1b954]/50
-                    pb-3
-                  "
-                >
-                  <h3 className="text-[15px] font-semibold text-white">
-                    {rsvpList.length} Ucapan
-                  </h3>
-
-                  <span className="text-[11px] text-white/50">
-                    Pesan Bahagia
+                    {item.status}
                   </span>
                 </div>
 
-                <div className="mt-5 space-y-3">
-                  {visibleRsvp.length === 0 && (
-                    <div
-                      className="
-                        rounded-xl
-                        border border-white/10
-                        bg-white/[0.04]
-                        px-5 py-8
-                        text-center
-                      "
-                    >
-                      <p className="text-[13px] text-white/60">
-                        Belum ada ucapan.
-                      </p>
+                <div
+                  className="
+                    mt-1
+                    flex items-center gap-1.5
+                    text-[10px]
+                    text-gray-500
+                  "
+                >
+                  <span>◷</span>
 
-                      <p className="mt-1 text-[12px] text-white/40">
-                        Jadilah yang pertama mengirim pesan
-                        bahagia.
-                      </p>
-                    </div>
-                  )}
-
-                  {visibleRsvp.map((item) => (
-                    <div
-                      key={item.id}
-                      className="
-                        rounded-xl
-                        border border-white/10
-                        bg-white/[0.96]
-                        p-4
-                        text-[#252525]
-                        shadow-[0_5px_18px_rgba(0,0,0,0.15)]
-                      "
-                    >
-                      <div className="flex items-start gap-3">
-                        {/* AVATAR */}
-
-                        <div
-                          className="
-                            flex h-10 w-10
-                            shrink-0
-                            items-center justify-center
-                            rounded-full
-                            bg-[#8b8b8b]
-                            text-white
-                          "
-                        >
-                          <svg
-                            viewBox="0 0 24 24"
-                            fill="currentColor"
-                            className="h-5 w-5"
-                          >
-                            <path d="M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8Zm0 2c-4.42 0-8 2.24-8 5v1h16v-1c0-2.76-3.58-5-8-5Z" />
-                          </svg>
-                        </div>
-
-                        <div className="min-w-0 flex-1">
-                          <div
-                            className="
-                              flex flex-wrap
-                              items-center gap-2
-                            "
-                          >
-                            <p
-                              className="
-                                break-words
-                                text-[14px]
-                                font-semibold
-                                text-[#222]
-                              "
-                            >
-                              {item.name}
-                            </p>
-
-                            <span
-                              className={`
-                                rounded-md
-                                px-2 py-1
-                                text-[9px]
-                                font-semibold
-                                ${
-                                  item.status === "Hadir"
-                                    ? "bg-[#f3c65c] text-[#4b3905]"
-                                    : item.status ===
-                                        "Tidak Hadir"
-                                      ? "bg-red-100 text-red-700"
-                                      : "bg-gray-200 text-gray-600"
-                                }
-                              `}
-                            >
-                              {item.status}
-                            </span>
-                          </div>
-
-                          <div
-                            className="
-                              mt-1
-                              flex items-center gap-1.5
-                              text-[10px]
-                              text-gray-500
-                            "
-                          >
-                            <span>◷</span>
-                            <span>
-                              {formatRsvpDate(
-                                item.createdAt
-                              )}
-                            </span>
-                          </div>
-                        </div>
-                      </div>
-
-                      <p
-                        className="
-                          mt-4
-                          whitespace-pre-line
-                          break-words
-                          text-[13px]
-                          leading-[1.65]
-                          text-[#272727]
-                        "
-                      >
-                        {item.message}
-                      </p>
-                    </div>
-                  ))}
+                  <span>
+                    {formatRsvpDate(
+                      item.createdAt
+                    )}
+                  </span>
                 </div>
-
-                {/* LIHAT LEBIH BANYAK */}
-
-                {rsvpList.length > 5 && (
-                  <div className="mt-6 flex justify-center">
-                    <button
-                      type="button"
-                      onClick={() =>
-                        setShowAllRsvp(
-                          (previous) => !previous
-                        )
-                      }
-                      className="
-                        min-w-[170px]
-                        rounded-lg
-                        border border-[#8f742e]
-                        bg-[#e1b954]
-                        px-5 py-3
-                        text-[12px] font-semibold
-                        text-[#3d3008]
-                        transition-all duration-300
-                        hover:bg-[#edc967]
-                        active:scale-[0.98]
-                      "
-                    >
-                      {showAllRsvp
-                        ? "Tampilkan Lebih Sedikit"
-                        : "Lihat Lebih Banyak"}
-                    </button>
-                  </div>
-                )}
               </div>
             </div>
-          </section>
+
+            <p
+              className="
+                mt-4
+                whitespace-pre-line
+                break-words
+                text-[13px]
+                leading-[1.65]
+                text-[#272727]
+              "
+            >
+              {item.message}
+            </p>
+          </div>
+        ))}
+      </div>
+
+      {/* LIHAT LEBIH BANYAK */}
+
+      {rsvpList.length > 5 && (
+        <div className="mt-6 flex justify-center">
+          <button
+            type="button"
+            onClick={() =>
+              setShowAllRsvp(
+                (previous) => !previous
+              )
+            }
+            className="
+              min-w-[170px]
+              rounded-lg
+              border border-[#8f742e]
+              bg-[#e1b954]
+              px-5 py-3
+              text-[12px] font-semibold
+              text-[#3d3008]
+              transition-all duration-300
+              hover:bg-[#edc967]
+              active:scale-[0.98]
+            "
+          >
+            {showAllRsvp
+              ? "Tampilkan Lebih Sedikit"
+              : "Lihat Lebih Banyak"}
+          </button>
+        </div>
+      )}
+    </div>
+  </div>
+</section>
 
           {/* =================================================
               FOOTER
           ================================================== */}
 
           <footer
-            className="
-              relative mx-auto
-              w-full max-w-[460px]
-              overflow-hidden
-              bg-black
-            "
-          >
-            <BackgroundPattern />
+  className="
+    relative mx-auto
+    w-full max-w-[460px]
+    overflow-hidden
+    bg-black
+  "
+>
+  <BackgroundPattern />
 
-            <div
-              className="
-                relative z-10
-                flex flex-col
-                items-center
-                px-6 pb-8 pt-6
-                text-center
-              "
-            >
-              <div
-                className="
-                  flex items-center
-                  justify-center
-                  text-[#e1b954]
-                "
-              >
-                <span
-                  className="
-                    h-px w-[55px]
-                    bg-gradient-to-r
-                    from-transparent
-                    to-[#e1b954]
-                  "
-                />
+  <div
+    className="
+      relative z-10
+      flex flex-col
+      items-center
+      px-6 pb-8 pt-6
+      text-center
+    "
+  >
+    <div
+      className="
+        flex items-center
+        justify-center
+        text-[#e1b954]
+      "
+    >
+      <span
+        className="
+          h-px w-[55px]
+          bg-gradient-to-r
+          from-transparent
+          to-[#e1b954]
+        "
+      />
 
-                <span className="mx-3 text-[15px]">
-                  ❦
-                </span>
+      <Image
+        src="/footer-ornament.png"
+        alt="Ornamen"
+        width={88}
+        height={88}
+        className="mx-3 h-auto w-[100px] object-contain"
+      />
 
-                <span
-                  className="
-                    h-px w-[55px]
-                    bg-gradient-to-l
-                    from-transparent
-                    to-[#e1b954]
-                  "
-                />
-              </div>
+      <span
+        className="
+          h-px w-[55px]
+          bg-gradient-to-l
+          from-transparent
+          to-[#e1b954]
+        "
+      />
+    </div>
 
-              <p
-                className="
-                  mt-4
-                  font-[family-name:var(--font-allura)]
-                  text-[30px]
-                  text-[#e1b954]
-                "
-              >
-                Terima Kasih
-              </p>
+    <p
+      className="
+        font-[family-name:var(--font-allura)]
+        text-[30px]
+        text-[#e1b954]
+      "
+    >
+      Terima Kasih
+    </p>
 
-              <p
-                className="
-                  mt-2
-                  max-w-[340px]
-                  text-[11px]
-                  leading-[1.7]
-                  text-white/60
-                "
-              >
-                Merupakan suatu kebahagiaan bagi kami
-                apabila Bapak/Ibu/Saudara/i berkenan hadir
-                dan memberikan doa restu.
-              </p>
+    <p
+      className="
+        mt-2
+        max-w-[340px]
+        text-[11px]
+        leading-[1.7]
+        text-white/60
+      "
+    >
+      Terima kasih atas doa, perhatian, dan kebersamaan yang diberikan
+      dalam hari bahagia kami.
+    </p>
 
-              <p
-                className="
-                  mt-6
-                  text-[10px]
-                  tracking-[0.08em]
-                  text-white/35
-                "
-              >
-                01 • 10 • 2026
-              </p>
-            </div>
-          </footer>
+    <p
+      className="
+        mt-6
+        text-[10px]
+        tracking-[0.08em]
+        text-white/35
+      "
+    >
+      Design By : Surya Pratama
+    </p>
+  </div>
+</footer>
         </>
       )}
     </main>
@@ -1688,7 +1709,7 @@ function SectionTitle({
     <div className="mb-7 flex flex-col items-center">
       <div className="mb-2 flex items-center text-[#e1b954]">
         <span className="h-px w-12 bg-[#e1b954]/60" />
-        <span className="mx-3 text-[18px]">❦</span>
+        <span className="mx-3 text-[18px]">✦</span>
         <span className="h-px w-12 bg-[#e1b954]/60" />
       </div>
 
@@ -1706,7 +1727,7 @@ function SectionTitle({
 
       <div className="mt-2 flex items-center text-[#e1b954]">
         <span className="h-px w-12 bg-[#e1b954]/60" />
-        <span className="mx-3 text-[18px]">❦</span>
+        <span className="mx-3 text-[18px]">✦</span>
         <span className="h-px w-12 bg-[#e1b954]/60" />
       </div>
     </div>
@@ -1732,7 +1753,7 @@ function Divider() {
           text-[15px]
         "
       >
-        ❦
+        ✦
       </div>
 
       <span className="h-px w-[70px] bg-gradient-to-l from-transparent to-[#e1b954]" />
