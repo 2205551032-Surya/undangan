@@ -30,6 +30,10 @@ const playfair = Playfair_Display({
 export const metadata: Metadata = {
   title: "Undangan Metatah",
   description: "Undangan Upacara Metatah",
+
+  icons: {
+    icon: "/ico.svg",
+  },
 };
 
 export default function RootLayout({
