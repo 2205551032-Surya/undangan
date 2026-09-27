@@ -28,8 +28,8 @@ const playfair = Playfair_Display({
 });
 
 export const metadata: Metadata = {
-  title: "Undangan Metatah",
-  description: "Undangan Upacara Metatah",
+  title: "Undangan Mepandes",
+  description: "Undangan Upacara Mepandes",
 
   icons: {
     icon: "/ico.svg",
