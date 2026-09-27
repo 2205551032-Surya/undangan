@@ -114,7 +114,7 @@ export default function InvitationPage() {
 
   useEffect(() => {
     const targetDate = new Date(
-      "2026-10-01T15:00:00+08:00"
+      "2026-10-04T11:00:00+08:00"
     ).getTime();
 
     const updateCountdown = () => {
@@ -439,7 +439,7 @@ export default function InvitationPage() {
     <main className="min-h-screen w-full bg-[#151515] text-white">
       <audio
         ref={audioRef}
-        src="/gus-teja-2.mp3"
+        src="/gus-teja.mp3"
         loop
         preload="auto"
       />
@@ -504,17 +504,17 @@ export default function InvitationPage() {
           `}
         />
 
-      <div
-        className={`
-          absolute inset-0 z-[1]
-          transition-all duration-[1200ms]
-          ${
-            opening
-              ? "bg-[linear-gradient(to_bottom,rgba(0,0,0,0.74)_0%,rgba(0,0,0,0.62)_25%,rgba(0,0,0,0.56)_50%,rgba(0,0,0,0.74)_100%)]"
-              : "bg-[linear-gradient(to_bottom,rgba(0,0,0,0.70)_0%,rgba(0,0,0,0.56)_25%,rgba(0,0,0,0.50)_50%,rgba(0,0,0,0.62)_75%,rgba(0,0,0,0.78)_100%)]"
-          }
-        `}
-      />
+        <div
+          className={`
+            absolute inset-0 z-[1]
+            transition-all duration-[1200ms]
+            ${
+              opening
+                ? "bg-[linear-gradient(to_bottom,rgba(0,0,0,0.68)_0%,rgba(0,0,0,0.55)_25%,rgba(0,0,0,0.48)_50%,rgba(0,0,0,0.68)_100%)]"
+                : "bg-[linear-gradient(to_bottom,rgba(0,0,0,0.62)_0%,rgba(0,0,0,0.48)_25%,rgba(0,0,0,0.42)_50%,rgba(0,0,0,0.55)_75%,rgba(0,0,0,0.72)_100%)]"
+            }
+          `}
+        />
 
         <Image
           src="/ornament-top-left.png"
@@ -656,11 +656,11 @@ export default function InvitationPage() {
                 drop-shadow-[0_3px_8px_rgba(0,0,0,0.45)]
               "
             >
-              Metatah
+              Mepandes
             </h1>
 
             <p className="mt-2 text-sm font-semibold tracking-[0.12em]">
-              01.10.2026
+              04.10.2026
             </p>
           </div>
 
@@ -854,7 +854,7 @@ export default function InvitationPage() {
                 >
                   <Image
                     src="/person-1.jpg"
-                    alt="Ni Putu Diana Dewi"
+                    alt="Ni Putu Eka Arianti"
                     fill
                     priority
                     sizes="166px"
@@ -872,7 +872,7 @@ export default function InvitationPage() {
                   text-white
                 "
               >
-                Ni Putu Diana Dewi, S. Ked
+                Ni Putu Eka Arianti
               </h3>
 
               <div
@@ -906,11 +906,11 @@ export default function InvitationPage() {
                   text-white/90
                 "
               >
-                Bapak I Gede Arya Darma Guna, S.H, M. Kn.
+                Bapak I Komang Budi Wartama
                 <br />
                 &
                 <br />
-                Ibu Ni Putu Dea Saraswati, S. Ked, Sp. A.
+                Ibu Ayu Juniari
               </p>
             </div>
           </section>
@@ -1031,12 +1031,12 @@ export default function InvitationPage() {
                 "
               >
                 <div className="border-y border-white/50 py-4 text-[15px] font-medium">
-                  Kamis
+                  Minggu
                 </div>
 
                 <div className="min-w-[78px]">
                   <p className="text-[42px] font-semibold italic leading-none">
-                    01
+                    04
                   </p>
 
                   <p className="mt-1 text-[17px]">
@@ -1067,7 +1067,7 @@ export default function InvitationPage() {
                   </p>
 
                   <p className="mt-2 text-[15px] font-semibold">
-                    15:00 WITA - Selesai
+                    11:00 WITA - Selesai
                   </p>
                 </div>
 
@@ -1084,8 +1084,7 @@ export default function InvitationPage() {
                   </p>
 
                   <p className="mt-2 max-w-[300px] text-[14px] font-semibold leading-[1.6]">
-                    Jero Pesaji Kawan, Jl. Yeh Gangga I Desa
-                    Sudimara, Banjar Sudimara Kelod, Tabanan
+                    Br. Keladian, Desa Pempatan
                   </p>
                 </div>
               </div>
@@ -1093,7 +1092,7 @@ export default function InvitationPage() {
               <a
                 data-reveal="zoom"
                 data-reveal-delay="4"
-                href="https://www.google.com/maps/search/?api=1&query=Jero+Pesaji+Kawan+Jl+Yeh+Gangga+I+Sudimara+Tabanan"
+                href="https://maps.app.goo.gl/7P7WLMdkgZPdGErj6"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="
@@ -1185,7 +1184,7 @@ export default function InvitationPage() {
               <a
                 data-reveal="zoom"
                 data-reveal-delay="3"
-                href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Upacara+Metatah&dates=20261001T070000Z/20261001T100000Z&details=Upacara+Metatah&location=Jero+Pesaji+Kawan%2C+Jl.+Yeh+Gangga+I+Desa+Sudimara%2C+Banjar+Sudimara+Kelod%2C+Tabanan"
+                href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Upacara+Mepandes&dates=20261004T030000Z/20261004T040000Z&details=Upacara+Mepandes&location=Br.+Keladian%2C+Desa+Pempatan"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="
@@ -2069,7 +2068,7 @@ function Divider() {
         ✦
       </div>
 
-      <span className="h-px w-[70px] bg-gradient-to-l from-transparent to-[#e1b954]" />
+      <span className="h-px w-[70px] bg-linear-to-l from-transparent to-[#e1b954]" />
     </div>
   );
 }
