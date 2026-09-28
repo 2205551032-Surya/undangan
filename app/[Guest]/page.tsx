@@ -16,12 +16,12 @@ interface RsvpItem {
 }
 
 const galleryImages = [
-  "/potret-1.jpg",
-  "/potret-2.jpg",
-  "/potret-3.jpg",
-  "/potret-4.jpg",
-  "/potret-5.jpg",
-  "/potret-6.jpg",
+  "/foto-1.jpg",
+  "/foto-2.jpg",
+  "/foto-3.jpg",
+  "/foto-4.jpg",
+  "/foto-5.jpg",
+  "/foto-6.jpg",
 ];
 
 export default function InvitationPage() {
@@ -492,7 +492,7 @@ export default function InvitationPage() {
         <div
           className={`
             absolute inset-0 z-0
-            bg-[url('/center1.jpg')]
+            bg-[url('/center2.jpg')]
             bg-cover bg-center bg-no-repeat
             transition-transform duration-[1800ms]
             [transition-timing-function:cubic-bezier(0.22,1,0.36,1)]
@@ -627,14 +627,14 @@ export default function InvitationPage() {
                 }
               `}
             >
-              <Image
+              {/* <Image
                 src="/logo.png"
                 alt="Ornamen"
                 width={180}
                 height={120}
                 priority
                 className="h-auto w-full object-contain"
-              />
+              /> */}
             </div>
 
             <div className="flex w-full items-center justify-center gap-3">
@@ -803,7 +803,6 @@ export default function InvitationPage() {
               >
                 Om Swastyastu
               </h2>
-
               <p
                 className="
                   mx-auto mt-6 max-w-[390px]
@@ -815,7 +814,7 @@ export default function InvitationPage() {
                 Atas Asung Kertha Wara Nugraha Ida Sang Hyang
                 Widhi Wasa/Tuhan Yang Maha Esa, tanpa mengurangi
                 rasa hormat kami mengundang Bapak/Ibu/Saudara/i
-                untuk menghadiri Upacara Mepandes putra putri
+                untuk menghadiri Upacara Mepandes putri
                 kami.
               </p>
 
@@ -853,7 +852,7 @@ export default function InvitationPage() {
                   "
                 >
                   <Image
-                    src="/person-1.jpg"
+                    src="/avatar2.jpg"
                     alt="Ni Putu Eka Arianti"
                     fill
                     priority
