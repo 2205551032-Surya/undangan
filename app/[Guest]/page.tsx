@@ -965,7 +965,7 @@ export default function InvitationPage() {
               <p className="mx-auto max-w-[400px] text-[14px] font-medium leading-[1.8] text-white/95">
                 Suatu Kebahagiaan bagi kami apabila
                 Bapak/Ibu/Saudara/i berkenan hadir dan
-                memberikan doa restu kepada putra putri kami.
+                memberikan doa restu kepada putri kami.
               </p>
 
               <p className="mt-5 text-[14px] font-medium">
