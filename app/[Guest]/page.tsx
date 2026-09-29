@@ -22,6 +22,15 @@ const galleryImages = [
   "/foto-4.jpg",
   "/foto-5.jpg",
   "/foto-6.jpg",
+  "/foto-7.jpg",
+  "/foto-8.jpg",
+  "/foto-9.jpg",
+  "/foto-10.jpg",
+  "/foto-11.jpg",
+  "/foto-12.jpg",
+  "/foto-13.jpg",
+  "/foto-14.jpg",
+  "/foto-15.jpg",
 ];
 
 export default function InvitationPage() {
